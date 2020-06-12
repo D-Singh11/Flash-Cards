@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DeckCard from './DeckCard';
 
 export default class DeckList extends Component {
     render() {
@@ -7,15 +8,9 @@ export default class DeckList extends Component {
             <View style={styles.container}>
                 <Text style={{fontSize:33, color:'orange'}}>DeckList</Text>
 
-                <View style={styles.deck}>
-                    <Text>Deck 1</Text>
-                </View>
-                <View style={styles.deck}>
-                    <Text>Deck 2</Text>
-                </View>
-                <View style={styles.deck}>
-                    <Text>Deck 3</Text>
-                </View>
+                <DeckCard title={'Deck 1'} />
+                <DeckCard title={'Deck 1'} />
+                <DeckCard title={'Deck 1'} />
             </View>
         )
     }
