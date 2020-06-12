@@ -1,13 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import DeckList from './components/DeckList';
+import { getDecks, saveDeckTitle } from './utils/api';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <DeckList />
-    </View>
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <DeckList />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
