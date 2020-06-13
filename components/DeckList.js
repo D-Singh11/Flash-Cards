@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckCard from './DeckCard';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/decks';
 
-export default class DeckList extends Component {
+class DeckList extends Component {
+    componentDidMount(){
+        this.props.dispatch(handleInitialData());
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{fontSize:33, color:'orange'}}>DeckList</Text>
+                <Text style={{ fontSize: 33, color: 'orange' }}>DeckList</Text>
 
                 <DeckCard title={'Deck 1'} />
                 <DeckCard title={'Deck 1'} />
@@ -23,11 +29,13 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     deck: {
-        width:200,
+        width: 200,
         height: 100,
         borderColor: '#323',
         borderBottomWidth: 2,
-        justifyContent:'center',
-        alignItems:'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
+
+export default connect()(DeckList);
