@@ -4,14 +4,14 @@ import { getDecks } from '../utils/api';
 
 export function addDeckAction(deckTitle) {
     return {
-        ADD_DECK,
+        type: ADD_DECK,
         deckTitle
     }
 }
 
 export function retreiveAll_API_Decks__SaveToStoreAction(decks) {
     return {
-        RETREIVE_DECKS,
+        type: RETREIVE_DECKS,
         decks
     }
 }
