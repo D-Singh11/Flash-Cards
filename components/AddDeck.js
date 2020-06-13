@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
     state = {
         inputText: ''
     }
+
     render() {
         return (
             <View style={styles.newDeck}>
@@ -16,7 +18,9 @@ export default class AddDeck extends Component {
                     value={this.state.inputText}
                     onChangeText={(inputValue) => this.setState({ inputText: inputValue })}
                 />
-                <TouchableOpacity style={styles.saveBtn} disabled={this.state.inputText.length === 0}>
+                <TouchableOpacity style={styles.saveBtn}
+                    disabled={this.state.inputText.length === 0}
+                >
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Save</Text>
                 </TouchableOpacity>
             </View>
@@ -40,3 +44,5 @@ const styles = StyleSheet.create({
         marginTop: 10
     }
 })
+
+export default connect()(AddDeck);
