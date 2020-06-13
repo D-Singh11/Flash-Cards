@@ -17,6 +17,9 @@ class DeckList extends Component {
                 <DeckCard title={'Deck 1'} />
                 <DeckCard title={'Deck 1'} />
                 <DeckCard title={'Deck 1'} />
+                <Text>
+                    {JSON.stringify(this.props.decks)}
+                </Text>
             </View>
         )
     }
@@ -38,4 +41,9 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect()(DeckList);
+function mapStateToProps(decks) {
+    return {
+        decks
+    }
+}
+export default connect(mapStateToProps)(DeckList);
