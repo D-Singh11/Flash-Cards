@@ -1,14 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import DeckList from './components/DeckList';
-import { getDecks, saveDeckTitle } from './utils/api';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './reducers';
+
+const store = createStore(reducers);
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <DeckList />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <DeckList />
+        </View>
+      </Provider>
     );
   }
 }
