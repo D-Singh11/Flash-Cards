@@ -39,12 +39,25 @@ export function saveDeckTitle(deckTitle) {
 export function addCardToDeck(deckTitle, questionCard) {
     return AsyncStorage.getItem(FLASHCARD_STORAGE_KEY)
         .then(results => {
-            data = JSON.parse(results);
-            data[deckTitle].questions.push(questionCard);           // add question to questions aray linked to decTitle
-            // data1 = {
+            let data = JSON.parse(results);
+            console.log("old data:   ",data);
+            const questions = [...data[deckTitle].questions, questionCard]
+
+
+            const deck = {
+                questions: questions
+            }           // add question to questions aray linked to decTitle
+            // console.log(deck);
+            // let updatedData = {
             //     ...data,
-            //     deckTitle:data[deckTitle]
+            //     [deckTitle]: {
+            //         ...data[deckTitle],
+            //         questions: [...data[deckTitle].questions, questionCard]
+            //     }
             // }
-            AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(data));               // save the added data to the Asyncstorage
+            AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
+                [deckTitle] : deck
+            }));               // save the added data to the Asyncstorage
         })
+
 }
