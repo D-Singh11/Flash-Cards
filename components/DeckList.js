@@ -5,21 +5,25 @@ import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/decks';
 
 class DeckList extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this.props.dispatch(handleInitialData());
     }
 
     render() {
+        const { decks } = this.props;
         return (
             <View style={styles.container}>
                 <Text style={{ fontSize: 33, color: 'orange' }}>DeckList</Text>
 
-                <DeckCard title={'Deck 1'} />
-                <DeckCard title={'Deck 1'} />
-                <DeckCard title={'Deck 1'} />
-                <Text>
-                    {JSON.stringify(this.props.decks)}
-                </Text>
+                {Object.keys(decks).map(deck => {
+                    return (
+                        <View>
+                            <DeckCard title={deck} />
+                            <Text>Cards : {decks[deck].questions.length}</Text>
+
+                        </View>
+                    )
+                })}
             </View>
         )
     }
