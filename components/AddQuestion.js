@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class AddQuestion extends Component {
+class AddQuestion extends Component {
     state = {
         question: '',
         answer: ''
@@ -9,6 +10,7 @@ export default class AddQuestion extends Component {
 
     handleSave = () => {
         console.log(this.state);
+        console.log(this.props);
     }
 
     render() {
@@ -20,7 +22,7 @@ export default class AddQuestion extends Component {
                         placeholder='enter your question'
                         multiline={true}
                         textAlign='center'
-                        onChangeText={(question => { this.setState({question})})}
+                        onChangeText={(question => { this.setState({ question }) })}
                     />
                 </View>
 
@@ -29,7 +31,7 @@ export default class AddQuestion extends Component {
                     <TextInput style={styles.textInput}
                         placeholder='enter your answer'
                         textAlign='center'
-                        onChangeText={(answer => { this.setState({answer})})}
+                        onChangeText={(answer => { this.setState({ answer }) })}
                     />
                 </View>
 
@@ -63,3 +65,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
     }
 })
+
+export default connect()(AddQuestion);
