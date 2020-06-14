@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import DeckCard from './DeckCard';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/decks';
@@ -7,6 +7,9 @@ import { handleInitialData } from '../actions/decks';
 class DeckList extends Component {
     componentDidMount() {
         this.props.dispatch(handleInitialData());
+        // AsyncStorage.getItem('flashcards').then(data=>{
+        //     console.log(data);
+        // })
     }
 
     render() {
@@ -14,8 +17,9 @@ class DeckList extends Component {
         return (
             <View style={styles.container}>
                 <Text style={{ fontSize: 33, color: 'orange' }}>DeckList</Text>
+                {/* <Text>{JSON.stringify(this.props.decks)}</Text> */}
 
-                {decks.map(deck => {
+                {decks && decks.map(deck => {
                     return (
                         <View key={deck.id}>
                             <TouchableOpacity
