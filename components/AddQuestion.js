@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 
 export default class AddQuestion extends Component {
+    state = {
+        question: '',
+        answer: ''
+    }
+
     render() {
         return (
             <View style={styles.question}>
@@ -11,6 +16,7 @@ export default class AddQuestion extends Component {
                         placeholder='enter your question'
                         multiline={true}
                         textAlign='center'
+                        onChangeText={(question => { this.setState({ question }) })}
                     />
                 </View>
 
@@ -19,6 +25,7 @@ export default class AddQuestion extends Component {
                     <TextInput style={styles.textInput}
                         placeholder='enter your answer'
                         textAlign='center'
+                        onChangeText={(answer => { this.setState({ answer }) })}
                     />
                 </View>
 
@@ -40,7 +47,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: 300,
         borderWidth: 1,
-        marginBottom:50
+        marginBottom: 50
     },
     saveBtn: {
         backgroundColor: 'black',
