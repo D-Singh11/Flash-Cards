@@ -43,13 +43,10 @@ export function addCardToDeck(deckTitle, questionCard) {
             let deck = data[deckTitle];
             deck.questions = [...data[deckTitle].questions, questionCard];               // add question to questions aray linked to decTitle
 
-            const updatedData = {
-                ...data,
-                [deckTitle]: deck
-            }
             AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({                              // save/merge into existing the added data to the Asyncstorage
                 // [deckTitle]: deck                                                                   // this will work only on slecteded dec. operate only only selected deck        
-                data: updatedData                                                                        // this one assigns whole new state again like redux does. assign whole state eventhough only one deck is being updated
+                ...data,
+                [deckTitle]: deck                                                                      // this one assigns whole new state again like redux does. assign whole state eventhough only one deck is being updated
             }));
         })
 
