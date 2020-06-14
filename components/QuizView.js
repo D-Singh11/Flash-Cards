@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class QuizView extends Component {
+class QuizView extends Component {
     render() {
         return (
             <View style={styles.quiz}>
@@ -13,7 +14,7 @@ export default class QuizView extends Component {
                 <View style={{ alignItems: 'center' }}>
                     <Text style={{ fontSize: 28 }}>What is question?</Text>
                     <TouchableOpacity>
-                        <Text style={{color:'red'}}>view answer</Text>
+                        <Text style={{ color: 'red' }}>view answer</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -60,3 +61,13 @@ const styles = StyleSheet.create({
         color: 'white'
     },
 })
+
+function mapStateToProps(state, props) {
+    const deckId = props.route.params.deckId;
+
+    return {
+        deck: state[deckId]
+    }
+}
+
+export default connect(mapStateToProps)(QuizView);
