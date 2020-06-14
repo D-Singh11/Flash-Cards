@@ -6,6 +6,7 @@ export default class DeckView extends Component {
         return (
             <View>
                 <Text>Deck View</Text>
+                <Text>{this.props.route.params.deckId}</Text>
             </View>
         )
     }

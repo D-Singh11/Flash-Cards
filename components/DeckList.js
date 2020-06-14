@@ -15,13 +15,13 @@ class DeckList extends Component {
             <View style={styles.container}>
                 <Text style={{ fontSize: 33, color: 'orange' }}>DeckList</Text>
 
-                {Object.keys(decks).map(deck => {
+                {decks.map(deck => {
                     return (
-                        <View key={deck}>
+                        <View key={deck.id}>
                             <TouchableOpacity
-                                onPress={() => { this.props.navigation.navigate('Deck Detail', { key: deck }) }}
+                                onPress={() => { this.props.navigation.navigate('Deck Detail', { deckId: deck.id }) }}
                             >
-                                <DeckCard title={deck} cardCount={decks[deck].questions.length} />
+                                <DeckCard title={deck.title} cardCount={deck.totalCards} />
                             </TouchableOpacity>
                         </View>
                     )
@@ -45,7 +45,14 @@ const styles = StyleSheet.create({
     }
 })
 
-function mapStateToProps(decks) {
+function mapStateToProps(state) {
+    const decks = Object.keys(state).map(id => {
+        return {
+            id,
+            title: state[id].title,
+            totalCards: state[id].questions.length
+        }
+    })
     return {
         decks
     }
