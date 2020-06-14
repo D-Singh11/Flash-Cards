@@ -7,6 +7,10 @@ export default class AddQuestion extends Component {
         answer: ''
     }
 
+    handleSave = () => {
+        console.log(this.state);
+    }
+
     render() {
         return (
             <View style={styles.question}>
@@ -16,7 +20,7 @@ export default class AddQuestion extends Component {
                         placeholder='enter your question'
                         multiline={true}
                         textAlign='center'
-                        onChangeText={(question => { this.setState({ question }) })}
+                        onChangeText={(question => { this.setState({question})})}
                     />
                 </View>
 
@@ -25,11 +29,11 @@ export default class AddQuestion extends Component {
                     <TextInput style={styles.textInput}
                         placeholder='enter your answer'
                         textAlign='center'
-                        onChangeText={(answer => { this.setState({ answer }) })}
+                        onChangeText={(answer => { this.setState({answer})})}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.saveBtn}>
+                <TouchableOpacity style={styles.saveBtn} onPress={this.handleSave}>
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Save</Text>
                 </TouchableOpacity>
             </View>
