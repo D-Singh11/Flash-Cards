@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import DeckCard from './DeckCard';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/decks';
@@ -18,9 +18,13 @@ class DeckList extends Component {
                 {Object.keys(decks).map(deck => {
                     return (
                         <View key={deck}>
-                            <DeckCard title={deck} />
-                            <Text>Cards : {decks[deck].questions.length}</Text>
-
+                            <TouchableOpacity
+                            //Todo: Update navigation to actual deck once Stack Navigation is implemented
+                                onPress={() => { this.props.navigation.navigate('Add Deck', { key: deck }) }}
+                            >
+                                <DeckCard title={deck} />
+                                <Text>Cards : {decks[deck].questions.length}</Text>
+                            </TouchableOpacity>
                         </View>
                     )
                 })}
@@ -38,10 +42,8 @@ const styles = StyleSheet.create({
     deck: {
         width: 200,
         height: 100,
-        borderColor: '#323',
-        borderBottomWidth: 2,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })
 
