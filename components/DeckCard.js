@@ -6,6 +6,7 @@ export default class DeckCard extends Component {
         return (
             <View style={styles.deck}>
                 <Text>{this.props.title}</Text>
+                <Text>Cards : {this.props.cardCount}</Text>
             </View>
         )
     }

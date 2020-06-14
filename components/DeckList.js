@@ -19,11 +19,10 @@ class DeckList extends Component {
                     return (
                         <View key={deck}>
                             <TouchableOpacity
-                            //Todo: Update navigation to actual deck once Stack Navigation is implemented
+                                //Todo: Update navigation to actual deck once Stack Navigation is implemented
                                 onPress={() => { this.props.navigation.navigate('Add Deck', { key: deck }) }}
                             >
-                                <DeckCard title={deck} />
-                                <Text>Cards : {decks[deck].questions.length}</Text>
+                                <DeckCard title={deck} cardCount={decks[deck].questions.length} />
                             </TouchableOpacity>
                         </View>
                     )
