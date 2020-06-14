@@ -13,6 +13,7 @@ class AddQuestion extends Component {
         const deckId = this.props.route.params.deckId;
         const card = this.state;
         this.props.dispatch(handleAddQuestion(deckId, card));
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -37,7 +38,9 @@ class AddQuestion extends Component {
                     />
                 </View>
 
-                <TouchableOpacity style={styles.saveBtn} onPress={this.handleSave}>
+                <TouchableOpacity style={styles.saveBtn} onPress={this.handleSave}
+                    disabled={this.state.question.length === 0 || this.state.answer.length === 0}
+                >
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Save</Text>
                 </TouchableOpacity>
             </View>
