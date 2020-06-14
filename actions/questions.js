@@ -5,6 +5,7 @@ export const ADD_QUESTION = 'ADD_QUESTION';
 export function addQuestionAction(deckId, question) {
     return {
         type: ADD_QUESTION,
+        deckTitle:deckId,
         question
     }
 }
@@ -15,8 +16,8 @@ export function handleAddQuestion(deckId, question) {
     return (dispatch) => {
         return addCardToDeck(deckId, question).then(response => {
             dispatch(addQuestionAction(deckId, question));
-            const deck = JSON.parse(response);
-            console.log(deck);
+        }).catch(error=>{
+            console.log('Error: card not saved, try again');
         })
     }
 }

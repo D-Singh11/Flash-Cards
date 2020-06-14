@@ -21,7 +21,6 @@ function decks(state = {}, action) {
             }
 
         case ADD_QUESTION:
-
             return {
                 ...state,
                 [action.deckTitle]: {
