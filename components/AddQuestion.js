@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { handleAddQuestion } from '../actions/questions';
 
 class AddQuestion extends Component {
     state = {
@@ -9,8 +10,9 @@ class AddQuestion extends Component {
     }
 
     handleSave = () => {
-        console.log(this.state);
-        console.log(this.props);
+        const deckId = this.props.route.params.deckId;
+        const card = this.state;
+        this.props.dispatch(handleAddQuestion(deckId, card));
     }
 
     render() {
