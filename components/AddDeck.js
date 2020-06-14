@@ -11,6 +11,10 @@ class AddDeck extends Component {
     handleSave = () => {
         const title = this.state.inputText;
         this.props.dispatch(handleAddDeck(title));                      // save the deck title to redux store
+        this.setState({
+            inputText: ''                                               // clear the input field once title is saved.
+        })
+        this.props.navigation.goBack();                                 // redirect user back to deckList screen/tab
     }
 
     render() {
