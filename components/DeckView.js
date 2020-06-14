@@ -16,7 +16,9 @@ class DeckView extends Component {
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Add Card</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.quizBtn}>
+                <TouchableOpacity style={styles.quizBtn}
+                    onPress={() => { this.props.navigation.navigate('Quiz', { deckId: this.props.route.params.deckId }) }}
+                >
                     <Text style={{ fontWeight: 'bold' }}>Start Quiz</Text>
                 </TouchableOpacity>
             </View>
