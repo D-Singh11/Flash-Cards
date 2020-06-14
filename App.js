@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
 import { NavigationContainer } from '@react-navigation/native';
-import TabsNavigation from './components/navigation/TabsNavigation';
+import MainNavigator from './components/navigation/MainNavigator';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -15,7 +15,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={styles.container}>
           <NavigationContainer>
-            <TabsNavigation />
+            <MainNavigator />
           </NavigationContainer>
         </View>
       </Provider>
