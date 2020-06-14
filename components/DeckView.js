@@ -11,7 +11,7 @@ class DeckView extends Component {
                     <Text>{this.props.deckDetail.totalCards} cards</Text>
                 </View>
                 <TouchableOpacity style={styles.addBtn}
-                    onPress={() => { this.props.navigation.navigate('Add Question'), { deckId: this.props.route.params.deckId } }}
+                    onPress={() => { this.props.navigation.navigate('Add Question', { deckId: this.props.route.params.deckId }) }}
                 >
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Add Card</Text>
                 </TouchableOpacity>
