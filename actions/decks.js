@@ -1,6 +1,6 @@
 export const RETREIVE_DECKS = 'RETREIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK';
-import { getDecks } from '../utils/api';
+import { getDecks, saveDeckTitle } from '../utils/api';
 
 export function addDeckAction(deckTitle) {
     return {
@@ -23,6 +23,17 @@ export function handleInitialData() {
         return getDecks().then(response => {
             const decks = JSON.parse(response);
             dispatch(retreiveAll_API_Decks__SaveToStoreAction(decks));
+        })
+    }
+}
+
+// thunked action creator to save new deck's title to backend api and then also update the redux store
+export function handleAddDeck(deckTitle) {
+    return (dispatch) => {
+        return saveDeckTitle(deckTitle).then(response => {
+            dispatch(addDeckAction(deckTitle));
+            const deck = JSON.parse(response);
+            console.log(deck);
         })
     }
 }

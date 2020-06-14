@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { handleAddDeck } from '../actions/decks';
 
 class AddDeck extends Component {
     state = {
         inputText: ''
+    }
+
+    handleSave = () => {
+        const title = this.state.inputText;
+        this.props.dispatch(handleAddDeck(title));                      // save the deck title to redux store
     }
 
     render() {
@@ -20,6 +26,7 @@ class AddDeck extends Component {
                 />
                 <TouchableOpacity style={styles.saveBtn}
                     disabled={this.state.inputText.length === 0}
+                    onPress={this.handleSave}
                 >
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Save</Text>
                 </TouchableOpacity>
