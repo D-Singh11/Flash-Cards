@@ -9,12 +9,25 @@ class QuizView extends Component {
     }
 
     checkAnswer(answer) {
+        const { qIndex } = this.state;
+        const { deck } = this.props;
+        let qScore = 0;
 
+        if (answer === deck.questions[qIndex].answer) {                        // check if user's answer is correct
+            qScore++;                                                        // increment score by 1 if answer is corrct
+        }
+
+        const nextQIndex = qIndex + 1                            // get index of current question and add 1 for next question index. it is used in JSX to display next question
+
+        this.setState({                                                      // update state so that react component view can be updated to show new question
+            qIndex: nextQIndex,
+            score: this.state.score + qScore,
+        })
     }
 
     render() {
-        const { qIndex } = this.state;
-        const { deck } = this.props;
+        const { qIndex } = this.state;            // destructure index from local state
+        const { deck } = this.props;              // destructire 'deck' property from props
 
         return (
             <View style={styles.quiz}>
