@@ -30,33 +30,39 @@ class QuizView extends Component {
         const { deck } = this.props;              // destructire 'deck' property from props
 
         return (
-            <View style={styles.quiz}>
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 24 }}>Question {qIndex + 1}</Text>
-                    <Text>{deck.questions.length - (qIndex + 1)} cards left</Text>
-                </View>
+            deck.questions.length > qIndex
+                ? <View style={styles.quiz}>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 24 }}>Question {qIndex + 1}</Text>
+                        <Text>{deck.questions.length - (qIndex + 1)} cards left</Text>
+                    </View>
 
-                <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].question}</Text>
-                    <TouchableOpacity>
-                        <Text style={{ color: 'red' }}>view answer</Text>
-                    </TouchableOpacity>
-                </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].question}</Text>
+                        <TouchableOpacity>
+                            <Text style={{ color: 'red' }}>view answer</Text>
+                        </TouchableOpacity>
+                    </View>
 
-                <View>
-                    <TouchableOpacity style={styles.correctBtn}
-                        onPress={() => { this.checkAnswer('correct') }}
-                    >
-                        <Text style={styles.btnText}>Correct</Text>
-                    </TouchableOpacity>
+                    <View>
+                        <TouchableOpacity style={styles.correctBtn}
+                            onPress={() => { this.checkAnswer('correct') }}
+                        >
+                            <Text style={styles.btnText}>Correct</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.incorrectBtn}
-                        onPress={() => { this.checkAnswer('incorrect') }}
-                    >
-                        <Text style={styles.btnText}>Incorrect</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.incorrectBtn}
+                            onPress={() => { this.checkAnswer('incorrect') }}
+                        >
+                            <Text style={styles.btnText}>Incorrect</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+                : (
+                    <View style={styles.quiz}>
+                        <Text style={{ fontSize: 28 }}>Percentage correct : {this.state.score}</Text>
+                    </View>
+                )
         )
     }
 }
