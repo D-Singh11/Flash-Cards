@@ -16,11 +16,14 @@ class DeckView extends Component {
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Add Card</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.quizBtn}
-                    onPress={() => { this.props.navigation.navigate('Quiz', { deckId: this.props.route.params.deckId }) }}
-                >
-                    <Text style={{ fontWeight: 'bold' }}>Start Quiz</Text>
-                </TouchableOpacity>
+                {this.props.deckDetail.totalCards > 0
+                    ? <TouchableOpacity style={styles.quizBtn}
+                        onPress={() => { this.props.navigation.navigate('Quiz', { deckId: this.props.route.params.deckId }) }}
+                      >
+                        <Text style={{ fontWeight: 'bold' }}>Start Quiz</Text>
+                      </TouchableOpacity>
+                    : <Text style={{ fontSize: 18, color: 'red' }}>Add cards to this deck to enable 'Quiz' feature</Text>
+                }
             </View>
         )
     }
