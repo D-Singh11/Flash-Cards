@@ -60,7 +60,7 @@ class QuizView extends Component {
                 </View>
                 : (
                     <View style={styles.quiz}>
-                        <Text style={{ fontSize: 28 }}>Percentage correct : {this.state.score}</Text>
+                        <Text style={{ fontSize: 28 }}>Percentage correct : {Math.floor((this.state.score / deck.questions.length) * 100)} </Text>
                     </View>
                 )
         )
