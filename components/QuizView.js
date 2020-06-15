@@ -3,27 +3,42 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { connect } from 'react-redux';
 
 class QuizView extends Component {
+    state = {
+        question: this.props.deck.questions[0],
+        qIndex: 0,
+        score: 0
+    }
+
+    checkAnswer(answer) {
+        
+    }
+
     render() {
+
         return (
             <View style={styles.quiz}>
                 <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 24 }}>Question 1</Text>
-                    <Text>5 cards left</Text>
+                    <Text style={{ fontSize: 24 }}>Question {this.state.qIndex + 1}</Text>
+                    <Text>{this.props.deck.questions.length - (this.state.qIndex + 1)} cards left</Text>
                 </View>
 
                 <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 28 }}>What is question?</Text>
+                    <Text style={{ fontSize: 28 }}>{this.state.question.question}</Text>
                     <TouchableOpacity>
                         <Text style={{ color: 'red' }}>view answer</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View>
-                    <TouchableOpacity style={styles.correctBtn}>
+                    <TouchableOpacity style={styles.correctBtn}
+                        onPress={() => { this.checkAnswer('correct') }}
+                    >
                         <Text style={styles.btnText}>Correct</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.incorrectBtn}>
+                    <TouchableOpacity style={styles.incorrectBtn}
+                        onPress={() => { this.checkAnswer('incorrect') }}
+                    >
                         <Text style={styles.btnText}>Incorrect</Text>
                     </TouchableOpacity>
                 </View>
