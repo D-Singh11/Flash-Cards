@@ -4,26 +4,27 @@ import { connect } from 'react-redux';
 
 class QuizView extends Component {
     state = {
-        question: this.props.deck.questions[0],
         qIndex: 0,
         score: 0
     }
 
     checkAnswer(answer) {
-        
+
     }
 
     render() {
+        const { qIndex } = this.state;
+        const { deck } = this.props;
 
         return (
             <View style={styles.quiz}>
                 <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 24 }}>Question {this.state.qIndex + 1}</Text>
-                    <Text>{this.props.deck.questions.length - (this.state.qIndex + 1)} cards left</Text>
+                    <Text style={{ fontSize: 24 }}>Question {qIndex + 1}</Text>
+                    <Text>{deck.questions.length - (qIndex + 1)} cards left</Text>
                 </View>
 
                 <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 28 }}>{this.state.question.question}</Text>
+                    <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].question}</Text>
                     <TouchableOpacity>
                         <Text style={{ color: 'red' }}>view answer</Text>
                     </TouchableOpacity>
