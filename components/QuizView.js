@@ -33,15 +33,18 @@ class QuizView extends Component {
 
         const nextQIndex = qIndex + 1                            // get index of current question and add 1 for next question index. it is used in JSX to display next question
 
+        this.flipCard(0);                                          // flip card back to question view when new question is dispalyed
+
         this.setState({                                                      // update state so that react component view can be updated to show new question
             qIndex: nextQIndex,
             score: this.state.score + qScore,
         })
+
     }
 
-    flipCard=()=>{
+    flipCard = (value) => {
         Animated.timing(this.animatedValue, {
-            toValue: 180,
+            toValue: value,
             duration: 800
         }).start();
     }
@@ -73,15 +76,15 @@ class QuizView extends Component {
 
                     <Animated.View style={[{ alignItems: 'center', backfaceVisibility: 'hidden' }, frontAnimatedStyle]}>
                         <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].question}</Text>
-                        <TouchableOpacity 
-                        onPress={this.flipCard}
+                        <TouchableOpacity
+                            onPress={() => { this.flipCard(180) }}
                         >
                             <Text style={{ color: 'red' }}>view answer</Text>
                         </TouchableOpacity>
                     </Animated.View>
 
                     {/* todo : implement flip card back to question */}
-                    <Animated.View style={[backAnimatedStyle, { alignItems: 'center', backfaceVisibility: 'hidden' } ]}>
+                    <Animated.View style={[backAnimatedStyle, { alignItems: 'center', backfaceVisibility: 'hidden' }]}>
                         <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].answer}</Text>
                         <TouchableOpacity onPress={this.flipCard}>
                             <Text style={{ color: 'red' }}>view question</Text>
