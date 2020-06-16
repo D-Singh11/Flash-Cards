@@ -87,7 +87,7 @@ class QuizView extends Component {
                     <Animated.View style={[backAnimatedStyle, { alignItems: 'center', backfaceVisibility: 'hidden' }]}>
                         <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].answer}</Text>
                         <TouchableOpacity
-                            onPress={() => { this.flipCard(180) }}
+                            onPress={() => { this.flipCard(0) }}
                         >
                             <Text style={{ color: 'red' }}>view question</Text>
                         </TouchableOpacity>
