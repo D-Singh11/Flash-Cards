@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Animated } from 'react-native';
 import { connect } from 'react-redux';
 
 class QuizView extends Component {
     state = {
         qIndex: 0,
         score: 0
+    }
+
+    componentWillMount() {
+        this.animatedValue = new Animated.Value(0);
+
+        this.frontInterpolate = this.animatedValue.interpolate({
+            inputRange: [0, 180],
+            outputRange: ['0deg', '180deg']
+        })
+
+        this.backInterpolate = this.animatedValue.interpolate({
+            inputRange: [0, 180],
+            outputRange: ['180deg', '360deg']
+        })
     }
 
     checkAnswer(answer) {
@@ -25,7 +39,27 @@ class QuizView extends Component {
         })
     }
 
+    flipCard=()=>{
+        Animated.timing(this.animatedValue, {
+            toValue: 180,
+            duration: 800
+        }).start();
+    }
+
     render() {
+
+        const frontAnimatedStyle = {
+            transform: [
+                { rotateX: this.frontInterpolate }
+            ]
+        }
+
+        const backAnimatedStyle = {
+            transform: [
+                { rotateX: this.backInterpolate }
+            ]
+        }
+
         const { qIndex } = this.state;            // destructure index from local state
         const { deck } = this.props;              // destructire 'deck' property from props
 
@@ -37,12 +71,22 @@ class QuizView extends Component {
                         <Text>{deck.questions.length - (qIndex + 1)} cards left</Text>
                     </View>
 
-                    <View style={{ alignItems: 'center' }}>
+                    <Animated.View style={[{ alignItems: 'center', backfaceVisibility: 'hidden' }, frontAnimatedStyle]}>
                         <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].question}</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity 
+                        onPress={this.flipCard}
+                        >
                             <Text style={{ color: 'red' }}>view answer</Text>
                         </TouchableOpacity>
-                    </View>
+                    </Animated.View>
+
+                    {/* todo : implement flip card back to question */}
+                    <Animated.View style={[backAnimatedStyle, { alignItems: 'center', backfaceVisibility: 'hidden' } ]}>
+                        <Text style={{ fontSize: 28 }}>{deck.questions[qIndex].answer}</Text>
+                        <TouchableOpacity onPress={this.flipCard}>
+                            <Text style={{ color: 'red' }}>view question</Text>
+                        </TouchableOpacity>
+                    </Animated.View>
 
                     <View>
                         <TouchableOpacity style={styles.correctBtn}
